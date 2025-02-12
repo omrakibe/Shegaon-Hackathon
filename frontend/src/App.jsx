@@ -32,12 +32,12 @@ export default function App() {
   }
 
   async function saveScore() {
-    await axios.post("http://localhost:5000/api/submit-score", { name, score });
+    await axios.post("http://localhost:5000/api/mathRoute/createScore", { name, score });
     fetchLeaderboard();
   }
 
   async function fetchLeaderboard() {
-    const res = await axios.get("http://localhost:5000/api/users");
+    const res = await axios.get("http://localhost:5000/api/mathRoute/getScore");
     setLeaderboard(res.data);
   }
 
