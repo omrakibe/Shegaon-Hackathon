@@ -43,14 +43,18 @@ export default function App() {
 
   return (
     <div className="App">
-      <h1>Math Kingdom 🎮</h1>
+      <h1 className="text-6xl flexwrap">Math Kingdom 🎮</h1>
+
       <input
+        className="text-red-500"
         type="text"
         placeholder="Enter your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <h2>{question.num1} + {question.num2} = ?</h2>
+      <h2>
+        {question.num1} + {question.num2} = ?
+      </h2>
       <input
         type="number"
         value={answer}
@@ -62,7 +66,9 @@ export default function App() {
       <h2>Leaderboard 🏆</h2>
       <ul>
         {leaderboard.map((user, index) => (
-          <li key={index}>{user.name}: {user.score} points</li>
+          <li key={index}>
+            {user.name}: {user.score} points
+          </li>
         ))}
       </ul>
     </div>
