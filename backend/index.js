@@ -1,5 +1,9 @@
 const express = require("express");
 const app = express();
+const dotenv = require("dotenv");
+
+dotenv.config();
+const PORT =  process.env.PORT || 5000;
 
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -11,7 +15,9 @@ app.use(express.json());
 app.use(cors());
 
 const mathRoute = require("./routes/mathRoute");
+const userRoute = require("./routes/userRoute");
 
 app.use("/api/mathRoute", mathRoute);
+app.use("/api/auth", userRoute)
 
-app.listen(5000, () => console.log("Backend running on port 5000"));
+app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
