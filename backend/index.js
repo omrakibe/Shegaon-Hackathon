@@ -16,8 +16,10 @@ app.use(cors());
 
 const mathRoute = require("./routes/mathRoute");
 const userRoute = require("./routes/userRoute");
+const typeSpeedRoute = require("./routes/typeSpeedRoute");
 
 app.use("/api/mathRoute", mathRoute);
 app.use("/api/auth", userRoute)
+app.use("/api/typeSpeed", typeSpeedRoute);
 
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));

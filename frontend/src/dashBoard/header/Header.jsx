@@ -4,7 +4,7 @@ import LocalImage from "./INNOVO.png";
 import { useAuth } from "../../context/AuthContext";
 
 export default function Header() {
-  const { user } = useAuth();
+  const { user, logout } = useAuth(); // ✅ Include logout function
 
   return (
     <header className="shadow sticky z-50 top-0">
@@ -14,19 +14,16 @@ export default function Header() {
             <img src={LocalImage} className="mr-3 h-12" alt="Logo" />
           </Link>
 
-        
-          <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
-            id="mobile-menu-2"
-          >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+          {/* Navigation Links */}
+          <div className="hidden lg:flex lg:w-auto lg:order-1">
+            <ul className="flex flex-col lg:flex-row lg:space-x-8">
               <li>
                 <NavLink
                   to="/"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
+                    `block py-2 px-3 duration-200 ${
                       isActive ? "text-orange-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } hover:text-orange-700`
                   }
                 >
                   Home
@@ -36,9 +33,9 @@ export default function Header() {
                 <NavLink
                   to="/about"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
+                    `block py-2 px-3 duration-200 ${
                       isActive ? "text-orange-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } hover:text-orange-700`
                   }
                 >
                   About
@@ -48,9 +45,9 @@ export default function Header() {
                 <NavLink
                   to="/contact"
                   className={({ isActive }) =>
-                    `block py-2 pr-4 pl-3 duration-200 ${
+                    `block py-2 px-3 duration-200 ${
                       isActive ? "text-orange-700" : "text-gray-700"
-                    } border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 hover:text-orange-700 lg:p-0`
+                    } hover:text-orange-700`
                   }
                 >
                   Contact
@@ -58,41 +55,38 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          
-          <nav>
+
+          {/* Authentication Section */}
+          <div className="flex items-center lg:order-2">
             {user ? (
-              <span>Welcome, {user.name}!</span>
+              <div className="flex items-center">
+                <span className="mr-4 text-gray-700">
+                  Welcome, {user.username || "Guest"}!
+                </span>
+                <button
+                  onClick={logout}
+                  className="text-white bg-red-600 hover:bg-red-700 px-4 py-2 rounded"
+                >
+                  Logout
+                </button>
+              </div>
             ) : (
-              <div className="flex items-center lg:order-2">
+              <>
                 <Link
                   to="/login"
-                  className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  className="text-gray-800 hover:bg-gray-50 px-4 py-2 rounded"
                 >
                   Log in
                 </Link>
                 <Link
                   to="/register"
-                  className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
+                  className="text-white bg-orange-700 hover:bg-orange-800 px-4 py-2 rounded"
                 >
                   Get started
                 </Link>
-              </div>
+              </>
             )}
-            {/* <div className="flex items-center lg:order-2">
-              <Link
-                to="/login"
-                className="text-gray-800 hover:bg-gray-50 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-              >
-                Log in
-              </Link>
-              <Link
-                to="/register"
-                className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
-              >
-                Get started
-              </Link>
-            </div> */}
-          </nav>
+          </div>
         </div>
       </nav>
     </header>

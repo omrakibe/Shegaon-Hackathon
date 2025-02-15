@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import api from "../utils/api";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
@@ -33,7 +33,7 @@ export default function MathGame() {
   }
 
   async function saveScore() {
-    await axios.post("http://localhost:5000/api/mathRoute/createScore", {
+    await api.post("/mathRoute/createScore", {
       name,
       score,
     });
@@ -42,7 +42,7 @@ export default function MathGame() {
   }
 
   async function fetchLeaderboard() {
-    const res = await axios.get("http://localhost:5000/api/mathRoute/getScore");
+    const res = await api.get("/mathRoute/getScore");
     setLeaderboard(res.data);
   }
 
